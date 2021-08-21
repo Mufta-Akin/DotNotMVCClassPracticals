@@ -29,6 +29,11 @@ namespace SMS.Data.Services
         IList<Ticket> GetAllTickets();
         IList<Ticket> GetOpenTickets();            
       
+        // ------------- User Management -------------------
+        User Authenticate(string email, string password);
+        User Register(string name, string email, string password, Role role);
+        User GetUserByEmail(string email);
+        
     }
     
 }

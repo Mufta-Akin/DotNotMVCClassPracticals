@@ -1,5 +1,5 @@
 using System;
-using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using SMS.Data.Models;
@@ -8,16 +8,17 @@ using SMS.Web.Models;
 
 namespace SMS.Web.Controllers
 {
+
+    // Q5 - add authorization configuration
     public class StudentController : BaseController
     {
         private IStudentService svc;
-
         public StudentController()
         {
             svc = new StudentServiceDb();
         }
 
-        // GET /student
+        // GET /student/index
         public IActionResult Index()
         {
             // complete this method
@@ -32,10 +33,10 @@ namespace SMS.Web.Controllers
             // retrieve the student with specified id from the service
             var s = svc.GetStudent(id);
 
-            // TBC check if s is null and return NotFound()
+            // check if s is null and return NotFound()
             if (s == null)
-            {     
-                Alert($"No such student {id}", AlertType.warning);          
+            {
+                Alert("Student Not Found", AlertType.warning);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -51,22 +52,25 @@ namespace SMS.Web.Controllers
             return View(s);
         }
 
-        // POST /student/create
+        // POST /student/create       
         [HttpPost]
-        public IActionResult Create(Student s)
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("Name, Email, Course, Age, Grade, PhotoUrl")] Student s) 
         {
             // check email is unique for this student
             if (svc.IsDuplicateEmail(s.Email, s.Id))
             {
+                // add manual validation error
                 ModelState.AddModelError(nameof(s.Email),"The email address is already in use");
             }
 
-            // complete POST action to add student
+            // validate student
             if (ModelState.IsValid)
             {
-                // TBC pass data to service to store 
-                svc.AddStudent(s.Name, s.Course, s.Email, s.Age, s.Grade, s.PhotoUrl);
-
+                // pass data to service to store 
+                var added = svc.AddStudent(s.Name, s.Course, s.Email, s.Age, s.Grade, s.PhotoUrl);
+                Alert("Student created successfully", AlertType.info);
+                
                 return RedirectToAction(nameof(Index));
             }
            
@@ -75,45 +79,57 @@ namespace SMS.Web.Controllers
         }
 
         // GET /student/edit/{id}
-        public IActionResult Edit(int id) {
-            var s = svc.GetStudent(id); // load the student using the service            
-            if (s == null)  {           // check if s is null and alert
-                Alert($"No such student {id}", AlertType.warning);          
+        public IActionResult Edit(int id)
+        {
+            // load the student using the service
+            var s = svc.GetStudent(id);
+
+            // check if s is null and return NotFound()
+            if (s == null)
+            {
+                Alert($"No such student {id}", AlertType.warning); 
                 return RedirectToAction(nameof(Index));
-            }
-            return View(s); // pass student to view for editing
+            }   
+
+            // pass student to view for editing
+            return View(s);
         }
 
         // POST /student/edit/{id}
         [HttpPost]
-        public IActionResult Edit(int id, Student s)
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, [Bind("Id, Name, Email, Course, Age, Grade, PhotoUrl")] Student s)
         {
             // check email is unique for this student
             if (svc.IsDuplicateEmail(s.Email, s.Id))
             {
+                // add manual validation error
                 ModelState.AddModelError(nameof(s.Email),"The email address is already in use");
             } 
-            // complete POST action to save student changes
+            
+            // validate student
             if (ModelState.IsValid)
             {
-                // Pass data to service to update
-                var updated = svc.UpdateStudent(s);
+                // pass data to service to update
+                svc.UpdateStudent(s);
                 Alert("Student details saved", AlertType.info);
-                return RedirectToAction(nameof(Index));     
+
+                return RedirectToAction(nameof(Index));
             }
+
             // redisplay the form for editing as validation errors
             return View(s);
         }
 
-        // GET / student/delete/{id}
+        // GET / student/delete/{id}     
         public IActionResult Delete(int id)
         {
             // load the student using the service
             var s = svc.GetStudent(id);
-            // check the returned student is not null and if so alert
+            // check the returned student is not null and if so return NotFound()
             if (s == null)
             {
-                Alert($"No such student {id}", AlertType.warning);          
+                Alert("Student Not Found", AlertType.warning);
                 return RedirectToAction(nameof(Index));
             }     
             
@@ -123,6 +139,7 @@ namespace SMS.Web.Controllers
 
         // POST /student/delete/{id}
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirm(int id)
         {
             // delete student via service
@@ -133,40 +150,42 @@ namespace SMS.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         // GET /student/createticket
         public IActionResult CreateTicket(int id)
         {
             var s = svc.GetStudent(id);
-             // check the returned student is not null and if so alert
+            // check the returned student is not null and if so alert
             if (s == null)
             {
                 Alert($"No such student {id}", AlertType.warning);          
                 return RedirectToAction(nameof(Index));
-            }  
+            }   
             // create the ticket view model and populate the StudentId property
-            var t = new Ticket {
+            var t = new TicketViewModel {
                 StudentId = id
             };
- 
+            
             return View("CreateTicket", t);
         }
 
         // POST /student/createticket
         [HttpPost]
-        public IActionResult CreateTicket(Ticket m)
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateTicket([Bind("StudentId, Issue")]TicketViewModel m)
         {
             var s = svc.GetStudent(m.StudentId);
-             // check the returned student is not null and if so alert
+             // check the returned student is not null and if so return NotFound()
             if (s == null)
             {
                 Alert($"No such student {m.StudentId}", AlertType.warning);          
                 return RedirectToAction(nameof(Index));
             }  
-            
-            Alert($"Ticket created successfully", AlertType.success);   
+        
             // create the ticket view model and populate the StudentId property
             svc.CreateTicket(m.StudentId, m.Issue);
- 
+            Alert($"Ticket created successfully", AlertType.success);   
+
             return RedirectToAction("Details", new { Id = m.StudentId });
         }
 

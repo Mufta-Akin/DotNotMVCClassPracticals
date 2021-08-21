@@ -10,7 +10,7 @@ namespace SMS.Data.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 5)]
+        [StringLength(500, MinimumLength = 5)]
         public string Issue { get; set; }
         
         public DateTime CreatedOn { get; set; } = DateTime.Now;
@@ -21,6 +21,7 @@ namespace SMS.Data.Models
         // Foreign key relating to Student ticket owner
         public int StudentId { get; set; }
 
+        // Required to stop cyclical Json parse error in web api
         [JsonIgnore]
         public Student Student { get; set; } // navigation property
 

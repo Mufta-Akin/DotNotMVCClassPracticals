@@ -4,7 +4,7 @@
 
 <div class="mt-4 mb-4">
    <!-- add an action link styled as a button to navigate to Create Action -->
-   <a asp-action="Create" class="btn btn-primary btn-sm">Create Ticket</a>
+   <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-action="Create" class="btn btn-primary btn-sm">Create Ticket</a>
 </div>
 
 <table class="table">
@@ -12,20 +12,30 @@
    <tr>
       <th>Id</th>
       <th>Student</th>
+      <th>Created</th>          
       <th>Issue</th>
-      <th>Created</th>           
       <th>Actions</th>
    </tr>
    </thead>
    <tbody>
    @foreach(var t in Model) {
-         <tr>
+      <tr>
          <td>@t.Id</td>
          <td>@t.Student.Name</td>
+         <td>@t.CreatedOn.ToShortDateString()</td>  
          <td>@t.Issue</td>
-         <td>@t.CreatedOn</td>              
          <td>
-            <form asp-action="Close">
+            @if (t.Active)
+            {
+               <i class="bi bi-toggle-on"></i>
+            }
+            else
+            {
+               <i class="bi bi-toggle-off"></i>
+            }
+         </td>
+         <td>
+            <form asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-action="Close">
                <input type="hidden" name="id" value=@t.Id />
                <button type="submit" class="btn btn-link">
                   <i class="bi bi-tools mr-2"></i>Close

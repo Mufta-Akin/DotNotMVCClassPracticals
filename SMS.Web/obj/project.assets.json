@@ -2,6 +2,27 @@
   "version": 3,
   "targets": {
     "net5.0": {
+      "Microsoft.AspNetCore.Cryptography.Internal/5.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/5.0.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.Internal": "5.0.3"
+        },
+        "compile": {
+          "lib/net5.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
+        }
+      },
       "Microsoft.Data.Sqlite.Core/5.0.3": {
         "type": "package",
         "dependencies": {
@@ -360,6 +381,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "5.0.3",
           "Microsoft.EntityFrameworkCore": "5.0.3",
           "Microsoft.EntityFrameworkCore.Sqlite": "5.0.3"
         },
@@ -373,6 +395,44 @@
     }
   },
   "libraries": {
+    "Microsoft.AspNetCore.Cryptography.Internal/5.0.3": {
+      "sha512": "4LtW8tSYWbwSXnerW/s2xLtEYJp2T3fPNfmn6JbFPXTaRQmOcEMv0rsZ3WgJsItjI5vfJfPGRfN/rFmX8YvGiA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.cryptography.internal/5.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.AspNetCore.Cryptography.Internal.dll",
+        "lib/net461/Microsoft.AspNetCore.Cryptography.Internal.xml",
+        "lib/net5.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.Internal.xml",
+        "microsoft.aspnetcore.cryptography.internal.5.0.3.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.internal.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/5.0.3": {
+      "sha512": "rFMWHdgzaOnoNcHoKWzwpFv/7l3m6Xm8d4RDp8UbH5zNIVCGWs+NPjGQPtq42oVyWpWu3NfmMd6KXca9En3u0g==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/5.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/net461/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "lib/net5.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/net5.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "microsoft.aspnetcore.cryptography.keyderivation.5.0.3.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
+      ]
+    },
     "Microsoft.Data.Sqlite.Core/5.0.3": {
       "sha512": "4nfSZVXex4PqQkcVu78/W0E2p3m24mwwqwMadnTPukHWx9Mh234WKg95qG9hs/ynULVGMfMyA1eUJdYDMeKFPw==",
       "type": "package",
@@ -961,11 +1021,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Web\\SMS.Web.csproj",
+      "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Web\\SMS.Web.csproj",
       "projectName": "SMS.Web",
-      "projectPath": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Web\\SMS.Web.csproj",
+      "projectPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Web\\SMS.Web.csproj",
       "packagesPath": "C:\\Users\\mufta\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Web\\obj\\",
+      "outputPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mufta\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -982,8 +1042,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Data\\SMS.Data.csproj": {
-              "projectPath": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Data\\SMS.Data.csproj"
+            "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj": {
+              "projectPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj"
             }
           }
         }

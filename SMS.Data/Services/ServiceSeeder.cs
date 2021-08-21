@@ -26,6 +26,12 @@ namespace SMS.Data.Services
             svc.CreateTicket(s1.Id, "What button do I press...");
             svc.CreateTicket(s2.Id, "Reset my password .......");
             svc.CreateTicket(s5.Id, "How do I sack Homer......");
+
+            // Q4 - add users
+            // Call service Register method to add 3 users (one for each role)
+            // email/password 
+            // admin@sms.com/admin, manager@sms.com/manager, guest@sms.com/guest
+
         }
     }
 }

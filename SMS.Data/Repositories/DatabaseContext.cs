@@ -10,11 +10,13 @@ namespace SMS.Data.Repositories
     // The Context is How EntityFramework communicates with the database
     // We define DbSet properties for each table in the database
     public class DatabaseContext :DbContext
-    {
+    { 
         // create DbSets for various models
+        public DbSet<User> Users { get; set; }
+      
         public DbSet<Student> Students { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-       
+        
         // Configure the context to use Specified database. We are using 
         // Sqlite database as it does not require any additional installations.
         // Could use SqlServer using connection below if installed
@@ -23,7 +25,6 @@ namespace SMS.Data.Repositories
             optionsBuilder
                 .LogTo(Console.WriteLine, LogLevel.Information)
 	            .UseSqlite("Filename=data.db");
-                //.UseSqlServer(@"Server=(localdb)\mssqllocaldb; Database=SMS; Trusted_Connection=True;ConnectRetryCount=0");
         }
 
         // Convenience method to recreate the database thus ensuring  the new database takes 

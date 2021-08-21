@@ -8,11 +8,31 @@
     ".NETCoreApp,Version=v5.0": {
       "SMS.Data/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "5.0.3",
           "Microsoft.EntityFrameworkCore": "5.0.3",
           "Microsoft.EntityFrameworkCore.Sqlite": "5.0.3"
         },
         "runtime": {
           "SMS.Data.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.Internal/5.0.3": {
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Cryptography.Internal.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.321.7303"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/5.0.3": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.Internal": "5.0.3"
+        },
+        "runtime": {
+          "lib/net5.0/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.321.7303"
+          }
         }
       },
       "Microsoft.Data.Sqlite.Core/5.0.3": {
@@ -325,6 +345,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.AspNetCore.Cryptography.Internal/5.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4LtW8tSYWbwSXnerW/s2xLtEYJp2T3fPNfmn6JbFPXTaRQmOcEMv0rsZ3WgJsItjI5vfJfPGRfN/rFmX8YvGiA==",
+      "path": "microsoft.aspnetcore.cryptography.internal/5.0.3",
+      "hashPath": "microsoft.aspnetcore.cryptography.internal.5.0.3.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/5.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rFMWHdgzaOnoNcHoKWzwpFv/7l3m6Xm8d4RDp8UbH5zNIVCGWs+NPjGQPtq42oVyWpWu3NfmMd6KXca9En3u0g==",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/5.0.3",
+      "hashPath": "microsoft.aspnetcore.cryptography.keyderivation.5.0.3.nupkg.sha512"
     },
     "Microsoft.Data.Sqlite.Core/5.0.3": {
       "type": "package",

@@ -1,16 +1,13 @@
 ﻿@model Student
 
-<partial name="_Breadcrumbs" model=@(new [] { 
-    ("/", "Home"), 
-    ("/student", "Students"), 
-    ("","Details") 
-})>
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/student", "Students"), ("","Details") })>
 
-<div class="card shadow rounded mt-4 p-3">
+<h3 class="mt-4 mb-4">Student Details</h3>
+
+<div class="card shadow rounded p-3">
     <div class="row pl-3">
         <!-- Details -->
-        <div class="col-8 mt-4">
-            <h3 class="mb-4">Student Details</h3>
+        <div class="col-8 pt-3">
             <dl class="row">       
                 <dt class="col-5">Name</dt>
                 <dd class="col-7">@Model.Name</dd>
@@ -26,7 +23,8 @@
 
                 <dt class="col-5">Classification</dt>
                 <dd class="col-7">@Model.Classification</dd>
-            </dl>               
+            </dl>
+                       
         </div>
 
         <!-- Photo -->
@@ -44,7 +42,7 @@
         </a> 
 
         <!-- add navigation link to Details action, passing the correct route id parameter --> 
-        <a asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-light mr-2">
+        <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-light mr-2">
             <i class="bi bi-pencil-square mr-1"></i>Edit Student
         </a>  
 
@@ -54,7 +52,7 @@
         </a> 
 
         <!-- add navigation link to Delete action, passing the correct route id parameter --> 
-        <button data-toggle="modal" data-target="#deleteModal" class="btn btn-sm  btn-link ml-4">
+        <button asp-condition=@(User.IsInRole("admin")) data-toggle="modal" data-target="#deleteModal" class="btn btn-sm  btn-link ml-4">
             <i class="bi bi-trash mr-1"></i>Delete Student
         </button>     
     
@@ -67,4 +65,3 @@
 </div>
 
 <partial name="_DeleteModal" />
-

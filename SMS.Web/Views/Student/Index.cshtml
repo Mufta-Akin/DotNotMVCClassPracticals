@@ -1,15 +1,10 @@
 ﻿@model IList<Student>
 
-<partial name="_Breadcrumbs" model=@(new [] { 
-    ("/", "Home"), 
-    ("","Students") 
-})>
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/student", "Students"), ("","Index") })>
 
 <h3 class="mb-3">Student List</h3>
 
-<a class="btn btn-sm btn-primary my-3" asp-controller="Student" asp-action="Create" >
-    <i class="bi bi-person-plus mr-1"></i>Create
-</a>     
+<a class="btn btn-sm btn-primary my-3" asp-controller="Student" asp-action="Create" >Create</a>     
 
 <table class="table">
     <thead>
@@ -30,15 +25,14 @@
                 <td>@s.Age</td>
                 <td>
                     <!-- Add View link -->
-                    <a asp-controller="Student" asp-action="Details" asp-route-id=@s.Id><i class="bi-list"></i></a>                      
+                    <a asp-controller="Student" asp-action="Details" asp-route-id=@s.Id><i class="bi bi-book"></i></a>                      
                     <!-- Add edit link  -->
-                    <a asp-controller="Student" asp-action="Edit" asp-route-id=@s.Id><i class="bi-pen"></i></a>   
+                    <a asp-controller="Student" asp-action="Edit" asp-route-id=@s.Id><i class="bi bi-pen"></i></a>   
                     <!-- Add delete link -->
-                    <a asp-controller="Student" asp-action="Delete" asp-route-id=@s.Id><i class="bi-trash"></i></a>   
-                  </td>
+                    <a asp-controller="Student" asp-action="Delete" asp-route-id=@s.Id><i class="bi bi-trash"></i></a>
+                </td>
             </tr>
         }
         
     </tbody>
 </table>
-

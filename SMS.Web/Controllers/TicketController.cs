@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using SMS.Web.Models;
 using SMS.Data.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SMS.Web.Controllers
 {
+
+    [Authorize]
     public class TicketController : BaseController
     {
         private readonly IStudentService svc;
@@ -23,6 +26,8 @@ namespace SMS.Web.Controllers
        
         //  POST /ticket/close/{id}
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles="admin,manager")]
         public IActionResult Close(int id)
         {
             // close ticket via service
@@ -32,14 +37,17 @@ namespace SMS.Web.Controllers
                 Alert("No such ticket found", AlertType.warning);            
             }
 
+            Alert($"Ticket {id } closed", AlertType.info);  
             // redirect to the index view
             return RedirectToAction(nameof(Index));
         }
        
         // GET /ticket/create
+        [Authorize(Roles="admin,manager")]
         public IActionResult Create()
         {
             var students = svc.GetStudents();
+            //populate the viewmodel with the student selectlist 
             var tvm = new TicketViewModel {
                 Students = new SelectList(students,"Id","Name") 
             };
@@ -50,14 +58,18 @@ namespace SMS.Web.Controllers
        
         // POST /ticket/create
         [HttpPost]
-        public IActionResult Create(TicketViewModel tvm)
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles="admin,manager")]
+        public IActionResult Create([Bind("StudentId,Issue")] TicketViewModel tvm)
         {
             if (ModelState.IsValid)
             {
                 svc.CreateTicket(tvm.StudentId, tvm.Issue);
 
+                Alert($"Ticket Created", AlertType.info);  
                 return RedirectToAction(nameof(Index));
             }
+
             // redisplay the form for editing
             return View(tvm);
         }
