@@ -1,5 +1,11 @@
 @model Student
 
+<partial name="_Breadcrumbs" model=@(new [] { 
+    ("/", "Home"), 
+    ("/student", "Students"), 
+    ("","Create") 
+})>
+
 <div class="card rounded shadow p-3">
     
     <h3 class="mb-4">Create Student</h3>

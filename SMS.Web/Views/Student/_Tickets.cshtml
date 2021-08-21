@@ -1,0 +1,30 @@
+
+<table class="table">
+    <thead>
+        <tr>           
+            <th style="width: 60%">Issue</th>
+            <th style="width: 15%">Created</th>
+            <th style="width: 15%">Resolved</th>    
+            <th style="width: 10%">Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var t in Model.Tickets) {
+            <tr>              
+                <td>@t.Issue</td>
+                <td>@t.CreatedOn.ToString("MM/dd/yy H:mm")</td>                 
+                <td>@(t.ResolvedOn == DateTime.MinValue ? "" : t.ResolvedOn.ToString("MM/dd/yy H:mm"))</td>
+                <td>
+                    @if (@t.Active) 
+                    {
+                        <i class="bi bi-toggle-on"></i>
+                    }
+                    else
+                    {
+                        <i class="bi bi-toggle-off"></i>
+                    }
+                </td>
+            </tr>   
+        }
+    </tbody>
+</table>

@@ -1,5 +1,22 @@
 @model Student
 
+<partial name="_Breadcrumbs" model=@(new [] { 
+    ("/", "Home"), 
+    ("/student", "Students"),
+    ($"/student/details/{Model.Id}", $"{Model.Id}"), 
+    ("","Edit") 
+})>
+
+@* <nav aria-label="breadcrumb">
+  <ol class="breadcrumb"> 
+    <li class="breadcrumb-item"><a asp-controller="Home"    asp-action="Index">Home</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Student" asp-action="Index">Students</a></li>
+    <li class="breadcrumb-item"><a asp-controller="Student" asp-action="Details" 
+                                                            asp-route-id=@Model.Id>@Model.Id</a></li>
+    <li class="breadcrumb-item active">Edit</li>
+  </ol>
+</nav> *@
+
 <div class="card rounded shadow p-3">
     
     <h3 class="mb-4">Edit Student</h3>

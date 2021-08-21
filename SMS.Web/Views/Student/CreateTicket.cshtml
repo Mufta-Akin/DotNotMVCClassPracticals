@@ -1,16 +1,29 @@
 @model Ticket
 
+<partial name="_Breadcrumbs" model=@(new [] { 
+    ("/", "Home"), 
+    ("/student", "Students"), 
+    ($"/student/details/{Model.StudentId}",$"{Model.StudentId}"), 
+    ("","CreateTicket"), 
+})>
+
 <h3 class="mt-4 mb-4">Create Ticket</h3>
 <div class="card rounded shadow p-3">
     <form asp-action="CreateTicket">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <!-- add hidden field to store StudentId -->
+        <input type="hidden" asp-for="StudentId" class="form-control"/>      
 
-            <!-- add form group for Issue textarea -->
-
-            <!-- add form group for Create and Cancel buttons -->
-            
+        <div class="form-group">
+            <label asp-for="Issue" class="control-label"></label>      
+            <textarea rows="5" asp-for="Issue" class="form-control"></textarea>
+            <span asp-validation-for="Issue" class="text-danger"></span>
+        </div>
+    
+        <div class="form-group">
+          <input type="submit" value="Create" class="btn btn-primary"/>
+          <a class="btn btn-secondary" asp-action="Details" asp-route-id=@Model.StudentId>Cancel</a>
+        </div>
     </form>
 </div>
 

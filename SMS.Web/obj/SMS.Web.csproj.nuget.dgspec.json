@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Web\\SMS.Web.csproj": {}
+    "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Web\\SMS.Web.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Data\\SMS.Data.csproj": {
+    "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Data\\SMS.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Data\\SMS.Data.csproj",
+        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Data\\SMS.Data.csproj",
         "projectName": "SMS.Data",
-        "projectPath": "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Data\\SMS.Data.csproj",
+        "projectPath": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Data\\SMS.Data.csproj",
         "packagesPath": "C:\\Users\\mufta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Data\\obj\\",
+        "outputPath": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mufta\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -68,14 +68,14 @@
         }
       }
     },
-    "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Web\\SMS.Web.csproj": {
+    "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Web\\SMS.Web.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Web\\SMS.Web.csproj",
+        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Web\\SMS.Web.csproj",
         "projectName": "SMS.Web",
-        "projectPath": "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Web\\SMS.Web.csproj",
+        "projectPath": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Web\\SMS.Web.csproj",
         "packagesPath": "C:\\Users\\mufta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Web\\obj\\",
+        "outputPath": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Web\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mufta\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -92,8 +92,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Data\\SMS.Data.csproj": {
-                "projectPath": "C:\\Users\\mufta\\Downloads\\Practical9-partial\\SMS.Data\\SMS.Data.csproj"
+              "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Data\\SMS.Data.csproj": {
+                "projectPath": "C:\\Users\\mufta\\Downloads\\Practical9-Solution\\SMS.Data\\SMS.Data.csproj"
               }
             }
           }

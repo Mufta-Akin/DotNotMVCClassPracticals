@@ -32,10 +32,11 @@ namespace SMS.Web.Controllers
             // retrieve the student with specified id from the service
             var s = svc.GetStudent(id);
 
-            // check if s is null and return NotFound()
+            // TBC check if s is null and return NotFound()
             if (s == null)
             {     
-               return NotFound();
+                Alert($"No such student {id}", AlertType.warning);          
+                return RedirectToAction(nameof(Index));
             }
 
             // pass student as parameter to the view
@@ -55,11 +56,15 @@ namespace SMS.Web.Controllers
         public IActionResult Create(Student s)
         {
             // check email is unique for this student
+            if (svc.IsDuplicateEmail(s.Email, s.Id))
+            {
+                ModelState.AddModelError(nameof(s.Email),"The email address is already in use");
+            }
 
             // complete POST action to add student
             if (ModelState.IsValid)
             {
-                // pass data to service to store 
+                // TBC pass data to service to store 
                 svc.AddStudent(s.Name, s.Course, s.Email, s.Age, s.Grade, s.PhotoUrl);
 
                 return RedirectToAction(nameof(Index));
@@ -73,7 +78,8 @@ namespace SMS.Web.Controllers
         public IActionResult Edit(int id) {
             var s = svc.GetStudent(id); // load the student using the service            
             if (s == null)  {           // check if s is null and alert
-                return NotFound();
+                Alert($"No such student {id}", AlertType.warning);          
+                return RedirectToAction(nameof(Index));
             }
             return View(s); // pass student to view for editing
         }
@@ -83,14 +89,16 @@ namespace SMS.Web.Controllers
         public IActionResult Edit(int id, Student s)
         {
             // check email is unique for this student
-            
-
+            if (svc.IsDuplicateEmail(s.Email, s.Id))
+            {
+                ModelState.AddModelError(nameof(s.Email),"The email address is already in use");
+            } 
             // complete POST action to save student changes
             if (ModelState.IsValid)
             {
                 // Pass data to service to update
                 var updated = svc.UpdateStudent(s);
-               
+                Alert("Student details saved", AlertType.info);
                 return RedirectToAction(nameof(Index));     
             }
             // redisplay the form for editing as validation errors
@@ -105,7 +113,8 @@ namespace SMS.Web.Controllers
             // check the returned student is not null and if so alert
             if (s == null)
             {
-               return NotFound();
+                Alert($"No such student {id}", AlertType.warning);          
+                return RedirectToAction(nameof(Index));
             }     
             
             // pass student to view for deletion confirmation
@@ -119,6 +128,7 @@ namespace SMS.Web.Controllers
             // delete student via service
             svc.DeleteStudent(id);
          
+            Alert($"Student {id} deleted successfully", AlertType.success);
             // redirect to the index view
             return RedirectToAction(nameof(Index));
         }
@@ -129,8 +139,9 @@ namespace SMS.Web.Controllers
             var s = svc.GetStudent(id);
              // check the returned student is not null and if so alert
             if (s == null)
-            {        
-                return NotFound();
+            {
+                Alert($"No such student {id}", AlertType.warning);          
+                return RedirectToAction(nameof(Index));
             }  
             // create the ticket view model and populate the StudentId property
             var t = new Ticket {
@@ -142,19 +153,21 @@ namespace SMS.Web.Controllers
 
         // POST /student/createticket
         [HttpPost]
-        public IActionResult CreateTicket(Ticket t)
+        public IActionResult CreateTicket(Ticket m)
         {
-            // retrieve student using t.StudentId
-           
-            // check the returned student is not null and if so alert and 
-            // redirect to Index view
-
-            // create alert that ticket was created successfully            
+            var s = svc.GetStudent(m.StudentId);
+             // check the returned student is not null and if so alert
+            if (s == null)
+            {
+                Alert($"No such student {m.StudentId}", AlertType.warning);          
+                return RedirectToAction(nameof(Index));
+            }  
             
-            // create the ticket passing t.StudentId and t.Issue to relevant service method
-
-            // redirect to Details view passing route parameter- new {Id = t.StudentId}
-            return RedirectToAction("Index");
+            Alert($"Ticket created successfully", AlertType.success);   
+            // create the ticket view model and populate the StudentId property
+            svc.CreateTicket(m.StudentId, m.Issue);
+ 
+            return RedirectToAction("Details", new { Id = m.StudentId });
         }
 
     }

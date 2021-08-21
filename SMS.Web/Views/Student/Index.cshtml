@@ -1,5 +1,10 @@
 ﻿@model IList<Student>
 
+<partial name="_Breadcrumbs" model=@(new [] { 
+    ("/", "Home"), 
+    ("","Students") 
+})>
+
 <h3 class="mb-3">Student List</h3>
 
 <a class="btn btn-sm btn-primary my-3" asp-controller="Student" asp-action="Create" >
@@ -25,11 +30,11 @@
                 <td>@s.Age</td>
                 <td>
                     <!-- Add View link -->
-                    <a asp-controller="Student" asp-action="Details" asp-route-id=@s.Id>View</a>                      
+                    <a asp-controller="Student" asp-action="Details" asp-route-id=@s.Id><i class="bi-list"></i></a>                      
                     <!-- Add edit link  -->
-                    <a asp-controller="Student" asp-action="Edit" asp-route-id=@s.Id>Edit</a>   
+                    <a asp-controller="Student" asp-action="Edit" asp-route-id=@s.Id><i class="bi-pen"></i></a>   
                     <!-- Add delete link -->
-                    <a asp-controller="Student" asp-action="Delete" asp-route-id=@s.Id>Delete</a>   
+                    <a asp-controller="Student" asp-action="Delete" asp-route-id=@s.Id><i class="bi-trash"></i></a>   
                   </td>
             </tr>
         }

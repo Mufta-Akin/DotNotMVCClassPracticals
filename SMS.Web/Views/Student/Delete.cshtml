@@ -1,5 +1,13 @@
 @model Student
 
+<partial name="_Breadcrumbs" model=@(new [] {
+    ("/", "Home"), 
+    ("/student", "Students"),
+    ($"/student/details/{Model.Id}",$"{Model.Id}"), 
+    ("","Delete") 
+})>
+
+
 <div>
     <!-- display the student using a <dl> as per Details.cshtml -->
     <div class="col card rounded shadow pt-3">
