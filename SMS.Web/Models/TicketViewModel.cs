@@ -1,20 +1,22 @@
-using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+
 
 namespace SMS.Web.Models
 {
     public class TicketViewModel
     {
-        // selectlist of students (id, name)       
-        public SelectList Students { set; get; }
-
-        // Collecting StudentId and Issue in Form
-        [Required]
-        [Display(Name = "Select Student")]
-        public int StudentId { get; set; }
-
-        [Required]
-        [StringLength(100, MinimumLength = 5)]
+        public int Id { get; set; }
+       
         public string Issue { get; set; }
+        public string Resolution { get; set; }
+        
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        public DateTime ResolvedOn { get; set; } = DateTime.MinValue;
+    
+        public bool Active { get; set; }
+
+        public int StudentId { get; set; }
+        public string StudentName { get; set; } 
     }
+
 }

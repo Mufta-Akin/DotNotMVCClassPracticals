@@ -5,6 +5,7 @@ using SMS.Data.Models;
 
 namespace SMS.Data.Services
 {
+ 
     // This interface describes the operations that a StudentService class should implement
     public interface IStudentService
     {
@@ -20,20 +21,22 @@ namespace SMS.Data.Services
         Student UpdateStudent(Student updated);  
         bool DeleteStudent(int id);
         IList<Student> GetStudentsQuery(Func<Student,bool> q);
-
+       
         // ---------------- Ticket Management ---------------
         Ticket CreateTicket(int studentId, string issue);
         Ticket GetTicket(int id);
-        Ticket CloseTicket(int id);
+        Ticket CloseTicket(int id, string resolution="resolved");
         bool DeleteTicket(int id);
         IList<Ticket> GetAllTickets();
-        IList<Ticket> GetOpenTickets();            
-      
-        // ------------- User Management -------------------
+        IList<Ticket> GetOpenTickets();        
+        IList<Ticket> SearchTickets(TicketRange range, string query);
+        IList<Ticket> GetTicketsQuery(Func<Ticket,bool> q);
+     
+        // ---------------- User Management --------------
+        User GetUserByEmail(string email);
         User Authenticate(string email, string password);
         User Register(string name, string email, string password, Role role);
-        User GetUserByEmail(string email);
-        
+
     }
     
 }

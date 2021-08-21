@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Test\\SMS.Test.csproj": {}
+    "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Test\\SMS.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj": {
+    "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj",
+        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj",
         "projectName": "SMS.Data",
-        "projectPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj",
+        "projectPath": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj",
         "packagesPath": "C:\\Users\\mufta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\obj\\",
+        "outputPath": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mufta\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -51,6 +51,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [
@@ -72,14 +76,14 @@
         }
       }
     },
-    "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Test\\SMS.Test.csproj": {
+    "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Test\\SMS.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Test\\SMS.Test.csproj",
+        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Test\\SMS.Test.csproj",
         "projectName": "SMS.Test",
-        "projectPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Test\\SMS.Test.csproj",
+        "projectPath": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Test\\SMS.Test.csproj",
         "packagesPath": "C:\\Users\\mufta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Test\\obj\\",
+        "outputPath": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mufta\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -96,8 +100,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj": {
-                "projectPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj"
+              "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj": {
+                "projectPath": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj"
               }
             }
           }

@@ -23,8 +23,7 @@
 
                 <dt class="col-5">Classification</dt>
                 <dd class="col-7">@Model.Classification</dd>
-            </dl>
-                       
+            </dl>              
         </div>
 
         <!-- Photo -->
@@ -42,7 +41,8 @@
         </a> 
 
         <!-- add navigation link to Details action, passing the correct route id parameter --> 
-        <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-light mr-2">
+        <!-- note use of ClaimsPrincipal extension method HasOneOfRoles (found in Extensions) -->
+        <a asp-condition=@User.HasOneOfRoles("admin,manager") asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-light mr-2">
             <i class="bi bi-pencil-square mr-1"></i>Edit Student
         </a>  
 

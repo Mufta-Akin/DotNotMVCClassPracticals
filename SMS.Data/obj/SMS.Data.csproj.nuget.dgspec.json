@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj": {}
+    "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj": {
+    "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj",
+        "projectUniqueName": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj",
         "projectName": "SMS.Data",
-        "projectPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\SMS.Data.csproj",
+        "projectPath": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\SMS.Data.csproj",
         "packagesPath": "C:\\Users\\mufta\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mufta\\Downloads\\Practical10\\SMS.Data\\obj\\",
+        "outputPath": "C:\\Users\\mufta\\Downloads\\PracticalComplete\\SMS.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mufta\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -51,6 +51,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [

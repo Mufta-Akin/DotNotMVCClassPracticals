@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+
+using SMS.Data.Services;
 using SMS.Web.Models;
 
 namespace SMS.Web.Controllers
@@ -13,13 +15,16 @@ namespace SMS.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private IStudentService _svc;
+
+        public HomeController(ILogger<HomeController> logger, IStudentService svc)
         {
             _logger = logger;
+            _svc = svc;
         }
 
         public IActionResult Index()
-        {
+        {            
             return View();
         }
 
@@ -27,7 +32,7 @@ namespace SMS.Web.Controllers
         {
             var about = new AboutViewModel {
                 Title = "About",
-                Message = "Our mission is to develop great solutions for educational student management",
+                Message = "Our mission is to develop great solutions for educational student management.",
                 Formed = new DateTime(2000,10,1)
             };
             return View(about);

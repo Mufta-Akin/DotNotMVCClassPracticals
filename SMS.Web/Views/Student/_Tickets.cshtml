@@ -1,28 +1,21 @@
-
+<h5 class="mt-2 text-info">Tickets</h5>
 <table class="table">
     <thead>
         <tr>           
-            <th style="width: 60%">Issue</th>
-            <th style="width: 15%">Created</th>
-            <th style="width: 15%">Resolved</th>    
-            <th style="width: 10%">Active</th>
+            <th style="width: 65%">Issue</th>
+            <th style="width: 25%">Created</th>  
+            <th style="width: 10%">Active</th>       
         </tr>
     </thead>
     <tbody>
         @foreach(var t in Model.Tickets) {
             <tr>              
                 <td>@t.Issue</td>
-                <td>@t.CreatedOn.ToString("MM/dd/yy H:mm")</td>                 
-                <td>@(t.ResolvedOn == DateTime.MinValue ? "" : t.ResolvedOn.ToString("MM/dd/yy H:mm"))</td>
+                <td>@t.CreatedOn</td>  
                 <td>
-                    @if (@t.Active) 
-                    {
-                        <i class="bi bi-toggle-on"></i>
-                    }
-                    else
-                    {
-                        <i class="bi bi-toggle-off"></i>
-                    }
+                    @* use asp-condition tag helper to remove need for @if/else razor block *@
+                    <i asp-condition="@t.Active" class="bi bi-toggle-on"></i>
+                    <i asp-condition="@(!t.Active)" class="bi bi-toggle-off"></i>                   
                 </td>
             </tr>   
         }

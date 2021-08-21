@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SMS.Web.Controllers
@@ -7,16 +7,11 @@ namespace SMS.Web.Controllers
 
     public class BaseController : Controller
     {
-
-        // Store Alert in TempData Storage 
-        // Where alert will only be accessible in next Request
         public void Alert(string message, AlertType type = AlertType.info)
         {
             TempData["Alert.Message"] = message;
-            TempData["Alert.Type"] = type.ToString();
-        }
+            TempData["Alert.Type"] = type.ToString();    
+        }      
 
     }
-
-  
 }

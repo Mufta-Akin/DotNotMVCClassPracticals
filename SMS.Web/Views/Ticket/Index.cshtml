@@ -1,48 +1,39 @@
-﻿@model IList<Ticket>
+﻿@model TicketSearchViewModel
 
-<h3>Open Ticket List</h3>
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/ticket", "Tickets"), ("","Index") })>
+<h3>Ticket List</h3>
 
-<div class="mt-4 mb-4">
-   <!-- add an action link styled as a button to navigate to Create Action -->
-   <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-action="Create" class="btn btn-primary btn-sm">Create Ticket</a>
+<div class="my-4 d-flex justify-content-between align-items-center">  
+   <a asp-action="Create" class="btn btn-primary btn-sm mr-2">Create Ticket</a>   
+   <partial name="_Search" /> <!-- add inline form to search ticket issues -->
 </div>
 
 <table class="table">
-   <thead>
-   <tr>
-      <th>Id</th>
-      <th>Student</th>
-      <th>Created</th>          
-      <th>Issue</th>
-      <th>Actions</th>
-   </tr>
-   </thead>
-   <tbody>
-   @foreach(var t in Model) {
+    <thead>
       <tr>
-         <td>@t.Id</td>
-         <td>@t.Student.Name</td>
-         <td>@t.CreatedOn.ToShortDateString()</td>  
-         <td>@t.Issue</td>
-         <td>
-            @if (t.Active)
-            {
-               <i class="bi bi-toggle-on"></i>
-            }
-            else
-            {
-               <i class="bi bi-toggle-off"></i>
-            }
-         </td>
-         <td>
-            <form asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-action="Close">
-               <input type="hidden" name="id" value=@t.Id />
-               <button type="submit" class="btn btn-link">
-                  <i class="bi bi-tools mr-2"></i>Close
-               </button>
-            </form>                                          
-         </td>
+         <th>Id</th>
+         <th>Student</th>        
+         <th>Created</th> 
+         <th>Issue</th> 
+         <th>Active</th>   
+         <th>Actions</th>
       </tr>
-   }
-   </tbody>
+    </thead>
+    <tbody>
+      @foreach(var t in Model.Tickets) {
+          <tr>
+            <td>@t.Id</td>
+            <td>@t.Student.Name</td>
+            <td>@t.CreatedOn.ToShortDateString()</td>
+            <td>@t.Issue.Substring(0, t.Issue.Length < 20 ? t.Issue.Length : 20) ...</td>
+            <td>
+               <i asp-condition="@t.Active"    class="bi bi-toggle-on"></i>
+               <i asp-condition="@(!t.Active)" class="bi bi-toggle-off"></i>  
+            </td>
+            <td>
+               <a asp-action="Details" asp-route-id="@t.Id"><i class="bi bi-lightbulb"></i> Details</a>                                          
+            </td>
+         </tr>
+      }
+    </tbody>
 </table>

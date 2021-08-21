@@ -8,14 +8,15 @@ using SMS.Web.Models;
 
 namespace SMS.Web.Controllers
 {
-
-    // Q5 - add authorization configuration
+    [Authorize]
     public class StudentController : BaseController
     {
         private IStudentService svc;
-        public StudentController()
+
+        // Configured via DI
+        public StudentController(IStudentService ss)
         {
-            svc = new StudentServiceDb();
+            svc = ss;
         }
 
         // GET /student/index
@@ -45,6 +46,7 @@ namespace SMS.Web.Controllers
         }
 
         // GET: /student/create
+        [Authorize(Roles="admin")]
         public IActionResult Create()
         {
             // display blank form to create a student
@@ -55,6 +57,7 @@ namespace SMS.Web.Controllers
         // POST /student/create       
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="admin")]
         public IActionResult Create([Bind("Name, Email, Course, Age, Grade, PhotoUrl")] Student s) 
         {
             // check email is unique for this student
@@ -79,6 +82,7 @@ namespace SMS.Web.Controllers
         }
 
         // GET /student/edit/{id}
+        [Authorize(Roles="admin,manager")]
         public IActionResult Edit(int id)
         {
             // load the student using the service
@@ -98,6 +102,7 @@ namespace SMS.Web.Controllers
         // POST /student/edit/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles="admin,manager")]
         public IActionResult Edit(int id, [Bind("Id, Name, Email, Course, Age, Grade, PhotoUrl")] Student s)
         {
             // check email is unique for this student
@@ -121,7 +126,8 @@ namespace SMS.Web.Controllers
             return View(s);
         }
 
-        // GET / student/delete/{id}     
+        // GET / student/delete/{id}
+        [Authorize(Roles="admin")]       
         public IActionResult Delete(int id)
         {
             // load the student using the service
@@ -139,6 +145,7 @@ namespace SMS.Web.Controllers
 
         // POST /student/delete/{id}
         [HttpPost]
+        [Authorize(Roles="admin")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirm(int id)
         {
@@ -152,6 +159,7 @@ namespace SMS.Web.Controllers
 
 
         // GET /student/createticket
+        [Authorize(Roles="admin,manager")]
         public IActionResult CreateTicket(int id)
         {
             var s = svc.GetStudent(id);
@@ -162,17 +170,19 @@ namespace SMS.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }   
             // create the ticket view model and populate the StudentId property
-            var t = new TicketViewModel {
+            var t = new TicketCreateViewModel {
                 StudentId = id
             };
             
             return View("CreateTicket", t);
         }
+        
 
         // POST /student/createticket
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateTicket([Bind("StudentId, Issue")]TicketViewModel m)
+        [Authorize(Roles="admin,manager")]
+        public IActionResult CreateTicket([Bind("StudentId, Issue")]TicketCreateViewModel m)
         {
             var s = svc.GetStudent(m.StudentId);
              // check the returned student is not null and if so return NotFound()
@@ -187,6 +197,14 @@ namespace SMS.Web.Controllers
             Alert($"Ticket created successfully", AlertType.success);   
 
             return RedirectToAction("Details", new { Id = m.StudentId });
+        }
+
+
+        // GET /student/search/{query}
+        public IActionResult Search(string query)
+        {
+            var results = svc.GetStudentsQuery(s => s.Name != null && s.Name.ToLower().Contains(query.ToLower()));
+            return View("Index", results);
         }
 
     }

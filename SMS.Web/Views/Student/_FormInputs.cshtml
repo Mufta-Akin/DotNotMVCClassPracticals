@@ -1,0 +1,41 @@
+@model Student
+
+<div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Course" class="control-label"></label>
+        <input asp-for="Course" class="form-control"/>
+        <span asp-validation-for="Course" class="text-danger"></span>
+    </div>
+
+    <!--move Age and grade input groups in 2 columns in single row -->      
+    <div class="row">
+        <div class="form-group col">
+            <label asp-for="Age" class="control-label"></label>
+            <input asp-for="Age" class="form-control"/>
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col">
+            <label asp-for="Grade" class="control-label"></label>
+            <input asp-for="Grade" class="form-control"/>
+            <span asp-validation-for="Grade" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control"/>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <!-- add PhotoUrl input group - ensure input field type is url -->
+    <div class="form-group">
+        <label asp-for="PhotoUrl" class="control-label"></label>
+        <input type="url" asp-for="PhotoUrl" class="form-control"/>
+        <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+    </div>

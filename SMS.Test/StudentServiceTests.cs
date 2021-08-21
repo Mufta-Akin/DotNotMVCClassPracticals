@@ -216,11 +216,13 @@ namespace SMS.Test
             var t = svc.CreateTicket(s.Id, "Dummy Ticket");
 
             // act
-            var r = svc.CloseTicket(t.Id);
+            var r = svc.CloseTicket(t.Id, "Resolved");
 
             // assert
-            Assert.NotNull(r);              // verify closed ticket returned          
-            Assert.False(r.Active);
+            Assert.NotNull(r);                          // verify closed ticket returned          
+            Assert.False(r.Active);                     // verify its closed
+            Assert.Equal("Resolved", t.Resolution);     // verify the resolution
+            Assert.NotEqual(DateTime.MinValue, r.ResolvedOn);
         }
 
         [Fact] 
@@ -231,12 +233,61 @@ namespace SMS.Test
             var t = svc.CreateTicket(s.Id, "Dummy Ticket");
 
             // act
-            var closed = svc.CloseTicket(t.Id);     // close active ticket    
-            closed = svc.CloseTicket(t.Id);         // close non active ticket
+            var closed = svc.CloseTicket(t.Id, "Resolved"); // close active ticket    
+            closed = svc.CloseTicket(t.Id);                 // close non active ticket
 
             // assert
             Assert.Null(closed);                    // no ticket returned as already closed
         }
+
+        [Fact] 
+        public void Ticket_GetAllTicketsWhenOneOpenAndOneClosed_ShouldReturnTwo()
+        {
+            // arrange
+            var s = svc.AddStudent("XXX", "xxx@email.com", "Computing", 20, 0, "http://photo.com");
+            var t1 = svc.CreateTicket(s.Id, "Dummy Ticket 1");
+            var t2 = svc.CreateTicket(s.Id, "Dummy Ticket 2");
+            var closed = svc.CloseTicket(t1.Id, "Resolved");     // close one ticket    
+
+            // act
+            var tickets = svc.GetAllTickets();      // get all tickets
+
+            // assert
+            Assert.Equal(2, tickets.Count);        
+        }
+
+        [Fact] 
+        public void Ticket_SearchTicketsWhenTwoResultsAvailableInAllTickets_ShouldReturnTwo()
+        {
+            // arrange
+            var s = svc.AddStudent("XXX", "xxx@email.com", "Computing", 20, 0, "http://photo.com");
+            var t1 = svc.CreateTicket(s.Id, "Dummy Ticket 1");
+            var t2 = svc.CreateTicket(s.Id, "Dummy Ticket 2");
+            var closed = svc.CloseTicket(t1.Id, "Resolved");     // close one ticket    
+
+            // act
+            var tickets = svc.SearchTickets(TicketRange.OPEN, "Dummy");      // search all tickets
+
+            // assert
+            Assert.Equal(2, tickets.Count);        
+        }
+
+        [Fact] 
+        public void Ticket_SearchTicketsWhenOneResultAvailableInOpenTickets_ShouldReturnOne()
+        {
+            // arrange
+            var s = svc.AddStudent("XXX", "xxx@email.com", "Computing", 20, 0, "http://photo.com");
+            var t1 = svc.CreateTicket(s.Id, "Dummy Ticket 1");
+            var t2 = svc.CreateTicket(s.Id, "Dummy Ticket 2");
+            var closed = svc.CloseTicket(t1.Id, "Resolved");     // close one ticket    
+
+            // act
+            var tickets = svc.SearchTickets(TicketRange.OPEN, "Dummy");      // search open tickets
+
+            // assert
+            Assert.Equal(1, tickets.Count);        
+        }
+
 
         //  =================  User Tests ===========================
         

@@ -4,19 +4,14 @@ using SMS.Data.Models;
 
 namespace SMS.Web.Models
 {
-    public class UserViewModel
-    {  
-        // Q3 add validation attributes
-        
-        public string Name { get; set; } 
-
+    public class UserLoginViewModel
+    {       
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
  
+        [Required]
         public string Password { get; set; }
-
-        public string PasswordConfirm  { get; set; }
-
-        public Role Role { get; set; }
 
     }
 }

@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,26 +19,35 @@ namespace SMS.Web
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-             // ** Add Authentication service using Cookie Scheme **
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme) 
-                    .AddCookie(options => {
-                        options.AccessDeniedPath = "/User/ErrorNotAuthorised";
-                        options.LoginPath = "/User/ErrorNotAuthenticated";
-            });
-            
+        {           
+            // ** Add Cookie and Jwt Authentication using extension method **
+            var secret = Configuration.GetValue<string>("JwtConfig:Secret");                     
+            services.AddCookieAndJwtAuthentication(secret);
+
+            // ** Add Cookie Authentication via extension method **
+            //services.AddCookieAuthentication();
+
+            // enable cors for webapi
+            //services.AddCors();
+
+            // configure instance of IStudentService with dependency injection system
+            services.AddTransient<IStudentService,StudentServiceDb>();
+
+            // configure MVC
             services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        // IServiceProvider added to enable call to seeder
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider provider)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
 
                 // here we ensure our service is seeded with dummy data for development purposes
-                ServiceSeeder.Seed(new StudentServiceDb());               
+                ServiceSeeder.Seed(provider.GetService<IStudentService>());               
             }
             else
             {
@@ -55,10 +60,12 @@ namespace SMS.Web
 
             app.UseRouting();
 
-            // ** Enable site Authentication/Authorization **
+            // configure cors to allow full cross origin access to webapi
+            //app.UseCors(c => c.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
+            /* Enable site Authentication/Authorization */
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.UseEndpoints(endpoints =>
             {

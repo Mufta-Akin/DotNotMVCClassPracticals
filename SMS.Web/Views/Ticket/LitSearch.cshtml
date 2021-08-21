@@ -1,0 +1,8 @@
+
+@* <div class="d-flex align-items-center justify-content-between">
+    <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) class="btn btn-sm btn-primary my-3 mr-3" asp-controller="Student" asp-action="Create" >Create</a>     
+    <lit-search/>
+</div> *@
+
+<lit-search id="search"></lit-search>
+

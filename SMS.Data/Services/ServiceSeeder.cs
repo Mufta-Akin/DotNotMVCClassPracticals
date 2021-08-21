@@ -22,16 +22,19 @@ namespace SMS.Data.Services
             var s5 = svc.AddStudent("Mr Burns","Management", "burns@mail.com", 81, 63, "https://static.wikia.nocookie.net/simpsons/images/a/a7/Montgomery_Burns.png" );
            
             // add tickets
-            svc.CreateTicket(s1.Id, "Why Bart you little......");
-            svc.CreateTicket(s1.Id, "What button do I press...");
-            svc.CreateTicket(s2.Id, "Reset my password .......");
-            svc.CreateTicket(s5.Id, "How do I sack Homer......");
+            var t1 = svc.CreateTicket(s1.Id, "Why Bart you little......");
+            var t2 = svc.CreateTicket(s1.Id, "I forgot my password.");
+            var t3 = svc.CreateTicket(s2.Id, "Please reset my password.");
+            var t4 = svc.CreateTicket(s3.Id, "Reset my password.");
+            var t5 = svc.CreateTicket(s5.Id, "How do I sack Homer.");
+            var t6 = svc.CreateTicket(s5.Id, "I forgot my email address.");
 
-            // Q4 - add users
-            // Call service Register method to add 3 users (one for each role)
-            // email/password 
-            // admin@sms.com/admin, manager@sms.com/manager, guest@sms.com/guest
-
+            svc.CloseTicket(t1.Id, "Resolved....");
+ 
+            // add users
+            var u1 = svc.Register("Guest", "guest@sms.com", "guest", Role.guest);
+            var u2 = svc.Register("Administrator", "admin@sms.com", "admin", Role.admin);
+            var u3 = svc.Register("Manager", "manager@sms.com", "manager", Role.manager);
         }
     }
 }

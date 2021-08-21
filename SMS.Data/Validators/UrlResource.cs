@@ -3,7 +3,10 @@ using System.Net;
 using System.ComponentModel.DataAnnotations;
 
 namespace SMS.Data.Validators {
+
+    // Custom Validator - can be used via [UrlResource] on model attribute
     public class UrlResource : ValidationAttribute {
+    
         protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
             string _url = (string)value; // url property being validated should be a string;           
            
@@ -15,7 +18,11 @@ namespace SMS.Data.Validators {
         }
         
         // verify that url points to a valid resource
-        private bool UrlResourceExists(string url) {                             
+        private bool UrlResourceExists(string url) { 
+            if (url == null)
+            {
+                return true;
+            }                            
             // method HEAD verifies resource existence
             WebRequest webRequest = WebRequest.Create(url);
             webRequest.Method = "HEAD";

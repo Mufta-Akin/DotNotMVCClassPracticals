@@ -1,0 +1,29 @@
+@model Ticket
+
+<div class="modal" tabindex="-1" id="closeModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header ">
+            <h5 class="modal-title">Close Ticket</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form asp-action="Close" asp-route-id="@Model.Id">
+
+            <div class="modal-body">
+                 <div class="form-group">
+                    <label asp-for="Resolution" class="control-label"></label>
+                    <textarea rows="7" asp-for="Resolution" class="form-control"></textarea>
+                    <span asp-validation-for="Resolution" class="text-danger"></span>
+                </div>     
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value="Confirm" class="btn btn-danger" />
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>           
+            </div>
+        </form>
+     
+    </div>
+  </div>
+</div>
