@@ -1,0 +1,61 @@
+﻿@model Student
+
+<div class="card shadow rounded mt-4 p-3">
+    <div class="row pl-3">
+        <!-- Details -->
+        <div class="col-8 mt-4">
+            <h3 class="mb-4">Student Details</h3>
+            <dl class="row">       
+                <dt class="col-5">Name</dt>
+                <dd class="col-7">@Model.Name</dd>
+
+                <dt class="col-5">Course</dt>
+                <dd class="col-7">@Model.Course</dd>
+                
+                <dt class="col-5">Age</dt>
+                <dd class="col-7">@Model.Age</dd>
+                
+                <dt class="col-5">Email</dt>
+                <dd class="col-7">@Model.Email</dd>
+
+                <dt class="col-5">Classification</dt>
+                <dd class="col-7">@Model.Classification</dd>
+            </dl>               
+        </div>
+
+        <!-- Photo -->
+        <div class="col-4">
+            <img src="@Model.PhotoUrl" class="img-fluid">
+        </div>
+    </div>
+
+    <!-- action options -->
+    <div class="row pl-3"> 
+
+        <!-- add navigation link to CreateTicket action, passing correct route parameter --> 
+        <a asp-action="CreateTicket" asp-route-id="@Model.Id" class="btn btn-sm btn-info mr-2">
+            <i class="bi bi-plus-square-dotted mr-1"></i>Add Ticket
+        </a> 
+
+        <!-- add navigation link to Details action, passing the correct route id parameter --> 
+        <a asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-light mr-2">
+            Edit Student
+        </a>  
+
+        <!-- add navigation link to redirect to Index action -->
+        <a asp-controller="Student" asp-action="Index" class="btn btn-sm btn-light mr-4">
+            Student List
+        </a> 
+
+        <!-- add navigation link to Delete action, passing the correct route id parameter --> 
+         <a asp-controller="Student" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-light mr-4">
+            Delete
+        </a> 
+    
+    </div>    
+
+    <!-- Display Tickets for current student (Model.Tickets) -->
+    <!-- Use a table and foreach loop - check Index.cshtml for example -->   
+    
+</div>
+

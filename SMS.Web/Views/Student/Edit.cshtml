@@ -1,0 +1,69 @@
+@model Student
+
+<div class="card rounded shadow p-3">
+    
+    <h3 class="mb-4">Edit Student</h3>
+
+    <form asp-action="Edit">
+        
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        <!-- we hide the id as its not user editable but needs to be in the -->
+        <!-- form to ensure the student passed to the controller is complete -->    
+        <input type="hidden" asp-for="Id" class="form-control"/>
+
+        <!-- add form groups for each student attributed being edited -->
+
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    
+        <div class="form-group">
+            <label asp-for="Course" class="control-label"></label>
+            <input asp-for="Course" class="form-control"/>
+            <span asp-validation-for="Course" class="text-danger"></span>
+        </div>
+
+        <!--move Age and grade input groups in 2 columns in single row -->      
+        <div class="row">
+            <div class="form-group col">
+                <label asp-for="Age" class="control-label"></label>
+                <input asp-for="Age" class="form-control"/>
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            <div class="form-group col">
+                <label asp-for="Grade" class="control-label"></label>
+                <input asp-for="Grade" class="form-control"/>
+                <span asp-validation-for="Grade" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <!-- add PhotoUrl input group - ensure input field type is url -->
+        <div class="form-group">
+            <label asp-for="PhotoUrl" class="control-label"></label>
+            <input type="url" asp-for="PhotoUrl" class="form-control"/>
+            <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+        </div>
+
+        <!----  you can copy the necessary groups from Create.cshtml --->
+        
+        <!-- submit button and cancel link which navigates to Index action -->
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary"/>
+            <a class="btn btn-secondary" asp-action="Details" asp-route-id="@Model.Id">Cancel</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
